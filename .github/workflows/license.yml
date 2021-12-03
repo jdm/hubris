@@ -16,6 +16,7 @@ jobs:
         with:
           concurrent_skipping: 'same_content'
           skip_after_successful_duplicate: 'true'
+          paths_ignore: '["doc/**"]'
           do_not_skip: '["pull_request", "workflow_dispath", "schedule"]'
   format:
     needs: skip_duplicate_jobs

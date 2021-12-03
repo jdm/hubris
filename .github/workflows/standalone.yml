@@ -1,11 +1,5 @@
 name: standalone
-on:
-  push:
-    paths-ignore:
-      - 'doc/**'
-  pull_request:
-    paths-ignore:
-      - 'doc/**'
+on: [push, pull_request]
 
 jobs:
   skip_duplicate_jobs:
@@ -18,6 +12,7 @@ jobs:
         with:
           concurrent_skipping: 'same_content'
           skip_after_successful_duplicate: 'true'
+          paths_ignore: '["doc/**"]'
           do_not_skip: '["pull_request", "workflow_dispath", "schedule"]'
 
   build:
