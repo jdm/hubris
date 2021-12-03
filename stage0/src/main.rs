@@ -45,6 +45,18 @@ pub unsafe extern "C" fn SecureFault() {
 
 #[entry]
 fn main() -> ! {
+    cfg_if::cfg_if! {
+        if #[cfg(not(feature = "a0-hardware"))] {
+            // This is the SYSCON_DIEID register on LPC55 which contains the ROM
+            // version. Unless we have explicitly built for A0 hardware,
+            // don't boot!
+            let val = unsafe { core::ptr::read_volatile(0x50000ffc as *const u32) };
+            if val & 1 == 0 {
+                loop { }
+            }
+        }
+    }
+
     let imagea = image_header::get_image_a().unwrap();
 
     let entry_pt = imagea.get_pc();
