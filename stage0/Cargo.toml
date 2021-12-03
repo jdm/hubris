@@ -3,6 +3,10 @@ name = "stage0"
 version = "0.1.0"
 edition = "2018"
 
+[features]
+default = []
+a0-hardware = ["lpc55_romapi/a0-hardware"]
+
 [dependencies]
 cortex-m = "0.7"
 cortex-m-rt = "0.6.12"
